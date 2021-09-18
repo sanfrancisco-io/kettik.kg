@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.add_inputs{
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(#372e97, rgb(156, 116, 116));
+  height: 500px;
+}
+.add_inputs form {
+  display: flex;
+  width: 320px;
+  flex-direction: column;
+}
