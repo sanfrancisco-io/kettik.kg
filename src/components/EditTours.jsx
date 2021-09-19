@@ -7,6 +7,7 @@ const EditTours = () => {
     const { getToursToEdit, saveEditedTour, toursToEdit } = useContext(adminContext)
     const [editTours, setEditTours] = useState(toursToEdit)
     const { id } = useParams()
+    console.log("id", id);
 
     useEffect(() => {
         setEditTours(toursToEdit)
@@ -15,6 +16,8 @@ const EditTours = () => {
     useEffect(() => {
         getToursToEdit(id)
     }, [])
+    console.log('EditTours toursToEdit', toursToEdit)
+    console.log('EditTours editTours', editTours)
 
     const history = useHistory()
 
@@ -22,7 +25,9 @@ const EditTours = () => {
         let obj = {
             ...editTours,
             [e.target.name]: e.target.value
+
         }
+        console.log("e", e);
         setEditTours(obj)
     }
 
@@ -35,75 +40,69 @@ const EditTours = () => {
                         <div className="add_inputs">
                             <form>
                                 <TextField
-                                    value={editTours.title}
+                                    value={editTours.Accessibility}
                                     id="standard-basic"
                                     label="Название пылесоса"
                                     onChange={handleInputs}
-                                    name='title'
+                                    name='Accessibility'
+                                />
+                                <TextField
+                                    value={editTours.complexity}
+                                    id="standard-basic"
+                                    label="Описание пылесоса"
+                                    onChange={handleInputs}
+                                    name='complexity'
                                 />
                                 <TextField
                                     value={editTours.description}
+
                                     id="standard-basic"
-                                    label="Описание пылесоса"
+                                    label="Цена пылесоса"
                                     onChange={handleInputs}
                                     name='description'
                                 />
                                 <TextField
-                                    value={editTours.price}
-                                    type='number'
+                                    value={editTours.photo}
                                     id="standard-basic"
-                                    label="Цена пылесоса"
+                                    label="Дата выпуска пылесоса"
+                                    name="photo"
+                                    onChange={handleInputs} />
+                                <TextField
+                                    value={editTours.price}
+                                    id="standard-basic"
+                                    label="Цвет пылесоса"
+                                    // type="number"
                                     onChange={handleInputs}
                                     name='price'
                                 />
-                                <TextField type="date"
-                                    value={editTours.year}
-                                    id="standard-basic"
-                                    label="Дата выпуска пылесоса"
-                                    name="year"
-                                    onChange={handleInputs} />
                                 <TextField
-                                    value={editTours.color}
-                                    id="standard-basic"
-                                    label="Цвет пылесоса"
-                                    onChange={handleInputs}
-                                    name='color'
-                                />
-                                <TextField
-                                    value={editTours.photo}
+                                    value={editTours.route}
                                     id="standard-basic"
                                     label="фото пылесоса"
                                     onChange={handleInputs}
-                                    name='photo'
+                                    name='route'
                                 />
                                 <TextField
-                                    value={editTours.weight}
-                                    type='number'
+                                    value={editTours.title}
+
                                     id="standard-basic"
                                     label="Вес пылесоса"
                                     onChange={handleInputs}
-                                    name='weight'
+                                    name='title'
                                 />
-                                <TextField
-                                    value={editTours.brand}
-                                    id="standard-basic"
-                                    label="Бренд пылесоса"
-                                    onChange={handleInputs}
-                                    name='brand'
-                                />
+
                                 <Button
                                     variant="outlined"
                                     color="secondary"
                                     onClick={(e) => {
                                         e.preventDefault()
-                                        if (!editTours.title.trim()
+                                        if (!editTours.Accessibility.trim()
+                                            || !editTours.complexity.trim()
                                             || !editTours.description.trim()
-                                            || !editTours.price.trim()
-                                            || !editTours.color.trim()
                                             || !editTours.photo.trim()
-                                            || !editTours.brand.trim()
-                                            || !editTours.weight.trim()
-                                            || !editTours.year.trim()) {
+                                            || !editTours.price.trim()
+                                            || !editTours.route.trim()
+                                            || !editTours.title.trim()) {
                                             alert('Заполните все поля!')
                                             return
                                         }

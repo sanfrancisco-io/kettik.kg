@@ -23,6 +23,7 @@ export default function ProductTable() {
     useEffect(() => {
         getTours()
     }, [])
+    console.log('tours', tours)
     return (
         <div className='table_container'>
             {
@@ -45,8 +46,8 @@ export default function ProductTable() {
                             </TableHead>
                             <TableBody>
                                 {
-                                    tours.map((item, index) => (
-                                        <TableRow key={item.id}>
+                                    Object.entries(tours).map(([id, item], index) => (
+                                        <TableRow key={id}>
                                             <TableCell component="th" scope="row">
                                                 {index + 1}
                                             </TableCell>
@@ -59,12 +60,12 @@ export default function ProductTable() {
                                             </TableCell>
                                             <TableCell align="left">{item.Accessibility}</TableCell>
                                             <TableCell align="left">{item.complexity}</TableCell>
-                                            <TableCell align="left" ><Button align="left" onClick={() => deleteTour(item.id)} variant="contained" color="primary">
+                                            <TableCell align="left" ><Button align="left" onClick={() => deleteTour(id)} variant="contained" color="primary">
                                                 Удалить
                                             </Button>
                                             </TableCell>
                                             <TableCell align="left" >
-                                                <Link to={`/edit/${item.id}`}>
+                                                <Link to={`/edit/${id}`}>
                                                     <Button align="left" variant="contained" color="primary">
                                                         Редактирование
                                                     </Button>
