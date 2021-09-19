@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useReducer } from 'react';
-import { API } from '../helpers/constapi';
+import { API, TOURS_API } from '../helpers/constapi';
 
 
 export const adminContext = React.createContext()
@@ -23,12 +23,14 @@ const AdminContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, INIT_STATE)
 
     const createTours = async (newItem) => {
-        await axios.post(API, { ...newItem, price: +newItem.price })
+        await axios.post(`${TOURS_API}.json`, { ...newItem, price: +newItem.price })
         getTours()
     }
 
     const getTours = async () => {
-        const { data } = await axios(API)
+        const { data } = await axios(`${TOURS_API}.json`)
+        // const { data } = await axios(API)
+        console.log("getTours data", data);
         dispatch({
             type: 'GET_TOURS',
             payload: data
@@ -36,12 +38,13 @@ const AdminContextProvider = ({ children }) => {
     }
 
     const deleteTour = async (id) => {
-        await axios.delete(`${API}/${id}`)
+        await axios.delete(`${TOURS_API}/${id}.json`)
         getTours()
     }
 
     const getToursToEdit = async (id) => {
-        const { data } = await axios(`${API}/${id}`)
+        const { data } = await axios(`${TOURS_API}/${id}.json`)
+        console.log('getToursToEdit data', data)
         dispatch({
             type: 'GET_TOUR_TO_EDIT',
             payload: data
@@ -49,7 +52,7 @@ const AdminContextProvider = ({ children }) => {
     }
 
     const saveEditedTour = async (editedTour) => {
-        await axios.patch(`${API}/${editedTour.id}`, { ...editedTour, price: +editedTour.price })
+        await axios.patch(`${TOURS_API}/${editedTour.id}.json`, { ...editedTour, price: +editedTour.price })
         getTours()
     }
     return (
