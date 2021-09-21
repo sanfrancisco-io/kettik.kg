@@ -16,8 +16,6 @@ const EditTours = () => {
     useEffect(() => {
         getToursToEdit(id)
     }, [])
-    console.log('EditTours toursToEdit', toursToEdit)
-    console.log('EditTours editTours', editTours)
 
     const history = useHistory()
 
@@ -40,16 +38,16 @@ const EditTours = () => {
                         <div className="add_inputs">
                             <form>
                                 <TextField
-                                    value={editTours.Accessibility}
+                                    value={editTours.accessibility}
                                     id="standard-basic"
-                                    label="Название пылесоса"
+                                    label="Доступность тура"
                                     onChange={handleInputs}
-                                    name='Accessibility'
+                                    name='accessibility'
                                 />
                                 <TextField
                                     value={editTours.complexity}
                                     id="standard-basic"
-                                    label="Описание пылесоса"
+                                    label="Сложность тура"
                                     onChange={handleInputs}
                                     name='complexity'
                                 />
@@ -57,28 +55,28 @@ const EditTours = () => {
                                     value={editTours.description}
 
                                     id="standard-basic"
-                                    label="Цена пылесоса"
+                                    label="Описание тура"
                                     onChange={handleInputs}
                                     name='description'
                                 />
                                 <TextField
                                     value={editTours.photo}
                                     id="standard-basic"
-                                    label="Дата выпуска пылесоса"
+                                    label="Фото тура"
                                     name="photo"
                                     onChange={handleInputs} />
                                 <TextField
                                     value={editTours.price}
                                     id="standard-basic"
-                                    label="Цвет пылесоса"
-                                    // type="number"
+                                    label="Цена тура"
+                                    type="number"
                                     onChange={handleInputs}
                                     name='price'
                                 />
                                 <TextField
                                     value={editTours.route}
                                     id="standard-basic"
-                                    label="фото пылесоса"
+                                    label="Маршрут тура"
                                     onChange={handleInputs}
                                     name='route'
                                 />
@@ -86,7 +84,7 @@ const EditTours = () => {
                                     value={editTours.title}
 
                                     id="standard-basic"
-                                    label="Вес пылесоса"
+                                    label="Название"
                                     onChange={handleInputs}
                                     name='title'
                                 />
@@ -96,7 +94,7 @@ const EditTours = () => {
                                     color="secondary"
                                     onClick={(e) => {
                                         e.preventDefault()
-                                        if (!editTours.Accessibility.trim()
+                                        if (!editTours.accessibility.trim()
                                             || !editTours.complexity.trim()
                                             || !editTours.description.trim()
                                             || !editTours.photo.trim()

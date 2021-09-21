@@ -8,7 +8,7 @@ const AddTours = () => {
         price: '',
         route: '',
         description: '',
-        Accessibility: '',
+        accessibility: '',
         complexity: '',
         photo: ''
     })
@@ -22,7 +22,6 @@ const AddTours = () => {
         }
         setTours(newTours)
     }
-
     return (
         <div>
             <div className="add_inputs">
@@ -56,11 +55,11 @@ const AddTours = () => {
                         name="description"
                         onChange={handleInputs} />
                     <TextField
-                        value={tours.Accessibility}
+                        value={tours.accessibility}
                         id="standard-basic"
                         label="Доступность тура по временам года"
                         onChange={handleInputs}
-                        name='Accessibility'
+                        name='accessibility'
                     />
                     <TextField
                         value={tours.complexity}
@@ -85,7 +84,7 @@ const AddTours = () => {
                                 || !tours.price.trim()
                                 || !tours.route.trim()
                                 || !tours.description.trim()
-                                || !tours.Accessibility.trim()
+                                || !tours.accessibility.trim()
                                 || !tours.complexity.trim()
                                 || !tours.photo.trim()) {
                                 alert('Заполните все поля!')
@@ -96,9 +95,9 @@ const AddTours = () => {
                                 price: tours.price.trim(),
                                 route: tours.route.trim(),
                                 description: tours.description.trim(),
-                                Accessibility: tours.Accessibility.trim(),
+                                accessibility: tours.accessibility.trim(),
                                 complexity: tours.complexity.trim(),
-                                photo: tours.photo.trim()
+                                photo: tours.photo.trim(),
                             })
                         }}
                     >

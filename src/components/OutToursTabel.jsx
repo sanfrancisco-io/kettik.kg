@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import { adminContext } from '../contexts/AdminContext'
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { Spinner } from 'react-bootstrap';
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
@@ -23,7 +24,6 @@ export default function ProductTable() {
     useEffect(() => {
         getTours()
     }, [])
-    console.log('tours', tours)
     return (
         <div className='table_container'>
             {
@@ -46,8 +46,8 @@ export default function ProductTable() {
                             </TableHead>
                             <TableBody>
                                 {
-                                    Object.entries(tours).map(([id, item], index) => (
-                                        <TableRow key={id}>
+                                    tours.map((item, index) => (
+                                        <TableRow key={item.id}>
                                             <TableCell component="th" scope="row">
                                                 {index + 1}
                                             </TableCell>
@@ -60,12 +60,12 @@ export default function ProductTable() {
                                             </TableCell>
                                             <TableCell align="left">{item.Accessibility}</TableCell>
                                             <TableCell align="left">{item.complexity}</TableCell>
-                                            <TableCell align="left" ><Button align="left" onClick={() => deleteTour(id)} variant="contained" color="primary">
+                                            <TableCell align="left" ><Button align="left" onClick={() => deleteTour(item.id)} variant="contained" color="primary">
                                                 Удалить
                                             </Button>
                                             </TableCell>
                                             <TableCell align="left" >
-                                                <Link to={`/edit/${id}`}>
+                                                <Link to={`/edit/${item.id}`}>
                                                     <Button align="left" variant="contained" color="primary">
                                                         Редактирование
                                                     </Button>
@@ -80,7 +80,9 @@ export default function ProductTable() {
                 )
                     :
                     (
-                        <h2>Loading</h2>
+                        <h2><Spinner animation="border" role="status">
+                            <span className="visually-hidden"></span>
+                        </Spinner></h2>
                     )
             }
         </div>

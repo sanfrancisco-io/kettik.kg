@@ -22,3 +22,24 @@ code {
   width: 320px;
   flex-direction: column;
 }
+
+
+/* main page start */
+.main{
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-sidebar{
+  width: 20%;
+}
+
+.content{
+  width: 80%;
+}
+.content-block{
+  display: flex;
+  flex-wrap: wrap;
+}
+/* main page end */
