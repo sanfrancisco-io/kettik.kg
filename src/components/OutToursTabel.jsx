@@ -11,7 +11,6 @@ import Paper from '@material-ui/core/Paper';
 import { adminContext } from '../contexts/AdminContext'
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { Spinner } from 'react-bootstrap';
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
@@ -80,9 +79,7 @@ export default function ProductTable() {
                 )
                     :
                     (
-                        <h2><Spinner animation="border" role="status">
-                            <span className="visually-hidden"></span>
-                        </Spinner></h2>
+                        <h2>Loading...</h2>
                     )
             }
         </div>

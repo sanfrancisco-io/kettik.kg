@@ -145,12 +145,13 @@ export default function Navbar() {
                         <ShoppingCartIcon />
                     </Badge>
                 </IconButton>
-                <p>Messages</p>
+                <p>Корзина</p>
             </MenuItem>
             <MenuItem>
                 <IconButton aria-label="show 11 new notifications" color="inherit">
                     <Badge badgeContent={11} color="secondary">
                         <NotificationsIcon />
+
                     </Badge>
                 </IconButton>
                 <p>Notifications</p>
@@ -201,7 +202,7 @@ export default function Navbar() {
                     <div className={classes.sectionDesktop}>
                         <IconButton aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={toursCountInCart} color="secondary">
-                                <MailIcon />
+                                <ShoppingCartIcon />
                             </Badge>
                         </IconButton>
                         <IconButton aria-label="show 17 new notifications" color="inherit">
