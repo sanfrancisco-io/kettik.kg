@@ -7,10 +7,18 @@ import Content from '../components/ToursContent';
 
 const MainPage = () => {
     return (
-        <div>
+        <div className='main-pagetwo'>
             <Navbar />
+            <div className='main-page' style={{
+                display: 'block',
+                textAlign: 'center',
+                color: 'white',
+                paddingBottom: '50px'
+            }}>
+                <h1>ТУРЫ И ПОХОДЫ ПО КЫРГЫЗСТАНУ <br />Путешествовать легко и просто</h1>
+            </div>
             <Container>
-                <div className="main">
+                <div className="main-content">
                     <LeftSideBar />
                     <Content />
                 </div>

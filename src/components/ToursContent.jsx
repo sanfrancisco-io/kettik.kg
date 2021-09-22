@@ -1,15 +1,13 @@
 import React, { useContext, useEffect } from 'react';
 import { clientContext } from '../contexts/ClientContext';
 import MediaCard from './Card';
-// import Pagination from './Pagination';
+import Pagination from './Pagination';
 
 const Content = () => {
-    // const { getProducts, product, currentPosts } = useContext(clientContext)
-    const { getTours, tours } = useContext(clientContext)
+    const { getTours, tours, currentPosts } = useContext(clientContext)
     useEffect(() => {
         getTours()
     }, [])
-    console.log(tours);
     return (
         <>
             {
@@ -17,12 +15,12 @@ const Content = () => {
                     <div className='content'>
                         <div className="content-block">
                             {
-                                tours.map(item => (
+                                currentPosts.map(item => (
                                     <MediaCard item={item} key={item.id} />
                                 ))
                             }
                         </div>
-                        {/* <Pagination /> */}
+                        <Pagination />
                     </div>
                 ) :
 
