@@ -1,5 +1,5 @@
 export const calcSubPrice = (item) => {
-    return item.count * item.productOne.price
+    return item.count * item.tour.price
 }
 export const calcTotalPrice = (tours) => {
     let totalPrice = 0

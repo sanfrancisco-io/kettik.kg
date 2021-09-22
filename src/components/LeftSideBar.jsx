@@ -44,8 +44,9 @@ const LeftSideBar = () => {
                     <FormControlLabel value="10000" control={<Radio />} label="10000" />
                     <FormControlLabel value="15000" control={<Radio />} label="15000" />
                     <FormControlLabel value="20000" control={<Radio />} label="20000" />
-                    <FormControlLabel value="1000000" control={<Radio />} label="Billion" />
+                    <FormControlLabel value="25000" control={<Radio />} label="25000" />
                 </RadioGroup>
+                <Button onClick={resetFilter}>Reset</Button>
             </FormControl>
             {/* <div>
                 <FormControl component="fieldset">
@@ -59,7 +60,6 @@ const LeftSideBar = () => {
                     </RadioGroup>
                 </FormControl>
             </div> */}
-            <Button onClick={resetFilter}>Reset</Button>
         </div >
     );
 };

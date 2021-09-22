@@ -10,28 +10,41 @@ import Typography from '@material-ui/core/Typography';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Truncate from 'react-truncate';
 import { clientContext } from '../contexts/ClientContext';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ChatIcon from '@material-ui/icons/Chat';
 
 const useStyles = makeStyles({
     root: {
         maxWidth: 345,
         margin: '0 10px 10px 10px',
-        width: 240,
+        width: 280,
         minWidth: 240,
-        height: 390,
+        height: 450,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
     },
     media: {
-        height: 140,
-        backgroundSize: 'contain',
+        height: 180,
         backgroundColor: 'rgb(197,199,214)'
     },
+    textContent: {
+        textAlign: 'center'
+    },
+    priceContent: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        flexDirection: 'column'
+    },
+    cardDisplay: {
+        display: 'flex',
+        justifyContent: 'space-between'
+    }
 });
 
 export default function MediaCard({ item }) {
     const classes = useStyles();
-    const { addAndDeleteToursInCart, checkTourInCart } = useContext(clientContext)
+    const { addAndDeleteToursInCart, checkTourInCart, addAndDeleteToursInFavorite, checkTourInFavorite } = useContext(clientContext)
     return (
         <Card className={classes.root}>
             <CardActionArea>
@@ -41,8 +54,8 @@ export default function MediaCard({ item }) {
                     title="Contemplative Reptile"
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h6" component="h2">
-                        <Truncate lines={1} ellipsis={<span>... <a href='/link/to/article'>далее</a></span>}>
+                    <Typography className={classes.textContent} gutterBottom variant="h6" component="h2">
+                        <Truncate lines={2} ellipsis={<span>... <a href='/link/to/article'>далее</a></span>}>
                             {item.title}
                         </Truncate>
                     </Typography>
@@ -50,22 +63,30 @@ export default function MediaCard({ item }) {
                         <Truncate lines={3} ellipsis={<span>... <a href='/link/to/article'>далее</a></span>}>
                             {item.description}
                         </Truncate>
-                        {/* <span style={{ display: 'block', fontSize: '16px' }}>Цена: {item.price}</span> */}
                     </Typography>
-                    <h3>Цена :{item.price}</h3>
-                    <Typography style={{ fontWeight: 'bold' }}>
+                    <Typography style={{ fontWeight: 'bold' }} className={classes.priceContent}>
+                        <h3>Цена :{item.price}</h3>
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions>
+            <CardActions className={classes.cardDisplay}>
                 <Button
                     onClick={() => addAndDeleteToursInCart(item)}
                     size="small"
                     color="primary">
-                    <ShoppingCartIcon color={checkTourInCart(item.id) ? 'primary' : 'secondary'} />
+                    <ShoppingCartIcon color={checkTourInCart(item.id) ? 'secondary' : 'primary'} />
                 </Button>
-                <Button size="small" color="primary">
-                    Подробнее
+                <Button
+                    onClick={() => addAndDeleteToursInFavorite(item)}
+                    size="small"
+                    color="gray">
+                    <FavoriteIcon color={checkTourInFavorite(item.id) ? 'secondary' : 'primary'} />
+                </Button>
+                <Button
+                    onClick={() => addAndDeleteToursInFavorite(item)}
+                    size="small"
+                    color="gray">
+                    <ChatIcon color={checkTourInFavorite(item.id) ? 'secondary' : 'primary'} />
                 </Button>
             </CardActions>
         </Card>

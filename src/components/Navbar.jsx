@@ -11,13 +11,11 @@ import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import MailIcon from '@material-ui/icons/Mail';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { clientContext } from '../contexts/ClientContext';
-import { Link, useHistory } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
     grow: {
         flexGrow: 1,
@@ -34,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     search: {
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
-        backgroundColor: alpha(theme.palette.common.white, 0.15),
+        backgroundColor: alpha(theme.palette.common.white, 0.25),
         '&:hover': {
             backgroundColor: alpha(theme.palette.common.white, 0.25),
         },
@@ -45,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
             marginLeft: theme.spacing(3),
             width: 'auto',
         },
+    },
+    root: {
+        backgroundColor: 'rgb(233, 150, 122)'
     },
     searchIcon: {
         padding: theme.spacing(0, 2),
@@ -80,10 +81,18 @@ const useStyles = makeStyles((theme) => ({
             display: 'none',
         },
     },
+    navbarTypographyContent: {
+        fontSize: '20px',
+        marginLeft: '40px',
+        cursor: 'pointer',
+        "&:hover": {
+            borderBottom: '2px solid #CCCCFF'
+        }
+    },
 }));
 
 export default function Navbar() {
-    const { toursCountInCart, getTours } = useContext(clientContext)
+    const { toursCountInCart, toursCountInFavorite } = useContext(clientContext)
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -145,15 +154,15 @@ export default function Navbar() {
                         <ShoppingCartIcon />
                     </Badge>
                 </IconButton>
-                <p>Messages</p>
+                <p>Корзина</p>
             </MenuItem>
             <MenuItem>
                 <IconButton aria-label="show 11 new notifications" color="inherit">
-                    <Badge badgeContent={11} color="secondary">
-                        <NotificationsIcon />
+                    <Badge badgeContent={toursCountInFavorite} color="secondary">
+                        <FavoriteIcon />
                     </Badge>
                 </IconButton>
-                <p>Notifications</p>
+                <p>Избранное</p>
             </MenuItem>
             <MenuItem onClick={handleProfileMenuOpen}>
                 <IconButton
@@ -164,25 +173,28 @@ export default function Navbar() {
                 >
                     <AccountCircle />
                 </IconButton>
-                <p>Profile</p>
+                <p>Аккаунт</p>
             </MenuItem>
         </Menu>
     );
 
     return (
         <div className={classes.grow}>
-            <AppBar position="static">
+            <AppBar position="fixed" className={classes.root}>
                 <Toolbar>
-                    <IconButton
-                        edge="start"
-                        className={classes.menuButton}
-                        color="inherit"
-                        aria-label="open drawer"
-                    >
-                        <MenuIcon />
+                    <IconButton aria-label="show 4 new mails" color="inherit">
+                        <Badge color="secondary">
+                            <img src='./images/Logo.svg' alt="kettik-logo" />
+                        </Badge>
                     </IconButton>
-                    <Typography className={classes.title} variant="h6" noWrap>
-                        Kettik
+                    <Typography className={classes.navbarTypographyContent} >
+                        О нас
+                    </Typography>
+                    <Typography className={classes.navbarTypographyContent} >
+                        Туры
+                    </Typography>
+                    <Typography className={classes.navbarTypographyContent} >
+                        Контакты
                     </Typography>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
@@ -201,12 +213,12 @@ export default function Navbar() {
                     <div className={classes.sectionDesktop}>
                         <IconButton aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={toursCountInCart} color="secondary">
-                                <MailIcon />
+                                <ShoppingCartIcon />
                             </Badge>
                         </IconButton>
                         <IconButton aria-label="show 17 new notifications" color="inherit">
-                            <Badge badgeContent={17} color="secondary">
-                                <NotificationsIcon />
+                            <Badge badgeContent={toursCountInFavorite} color="secondary">
+                                <FavoriteIcon />
                             </Badge>
                         </IconButton>
                         <IconButton

@@ -49,6 +49,126 @@
       "complexity": "Сложно",
       "photo": "https://www.biletik.aero/upload/iblock/e39/e39b95b39a1a73bff2eee34ad4878236.jpg",
       "id": 5
+    },
+    {
+      "title": "Отличынй тур",
+      "price": 25000,
+      "route": "Бишкек-Аларча",
+      "description": "Отличный сос",
+      "accessibility": "доступный",
+      "complexity": "Сложный",
+      "photo": "Фото",
+      "id": 6
+    },
+    {
+      "title": "6",
+      "price": 6,
+      "route": "6",
+      "description": "66",
+      "accessibility": "6",
+      "complexity": "6",
+      "photo": "6",
+      "id": 7
+    },
+    {
+      "title": "6",
+      "price": 6,
+      "route": "6",
+      "description": "66",
+      "accessibility": "6",
+      "complexity": "6",
+      "photo": "6",
+      "id": 8
+    },
+    {
+      "title": "6",
+      "price": 6,
+      "route": "6",
+      "description": "66",
+      "accessibility": "6",
+      "complexity": "6",
+      "photo": "6",
+      "id": 9
+    },
+    {
+      "title": "6",
+      "price": 6,
+      "route": "6",
+      "description": "66",
+      "accessibility": "6",
+      "complexity": "6",
+      "photo": "6",
+      "id": 10
+    },
+    {
+      "title": "6",
+      "price": 6,
+      "route": "6",
+      "description": "66",
+      "accessibility": "6",
+      "complexity": "6",
+      "photo": "6",
+      "id": 11
+    },
+    {
+      "title": "6",
+      "price": 6,
+      "route": "6",
+      "description": "66",
+      "accessibility": "6",
+      "complexity": "6",
+      "photo": "6",
+      "id": 12
+    },
+    {
+      "title": "6",
+      "price": 6,
+      "route": "6",
+      "description": "66",
+      "accessibility": "6",
+      "complexity": "6",
+      "photo": "6",
+      "id": 13
+    },
+    {
+      "title": "6",
+      "price": 6,
+      "route": "6",
+      "description": "66",
+      "accessibility": "6",
+      "complexity": "6",
+      "photo": "6",
+      "id": 14
+    },
+    {
+      "title": "6",
+      "price": 6,
+      "route": "6",
+      "description": "66",
+      "accessibility": "6",
+      "complexity": "6",
+      "photo": "6",
+      "id": 15
+    },
+    {
+      "title": "6",
+      "price": 6,
+      "route": "6",
+      "description": "66",
+      "accessibility": "6",
+      "complexity": "6",
+      "photo": "6",
+      "id": 16
+    },
+    {
+      "title": "6",
+      "price": 6,
+      "route": "6",
+      "description": "66",
+      "accessibility": "6",
+      "complexity": "6",
+      "photo": "6",
+      "id": 17
     }
   ]
 }

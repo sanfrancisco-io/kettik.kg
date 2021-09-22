@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { calcSubPrice, calcTotalPrice } from '../helpers/calc';
 import { TOURS_API } from '../helpers/constapi';
 
@@ -11,6 +11,10 @@ const INIT_STATE = {
         ?
         JSON.parse(localStorage.getItem('cart')).tours.length
         : 0,
+    toursCountInFavorite: JSON.parse(localStorage.getItem('favorite'))
+        ?
+        JSON.parse(localStorage.getItem('favorite')).tours.length
+        : 0,
 }
 
 const reducer = (state = INIT_STATE, action) => {
@@ -19,6 +23,8 @@ const reducer = (state = INIT_STATE, action) => {
             return { ...state, tours: action.payload }
         case 'ADD_AND_DELETE_TOUR_CART':
             return { ...state, toursCountInCart: action.payload }
+        case 'ADD_AND_DELETE_TOUR_FAVORITE':
+            return { ...state, toursCountInFavorite: action.payload }
         default:
             return { ...state }
     }
@@ -65,6 +71,30 @@ const ClientContextProvider = ({ children }) => {
         console.log(cart);
     }
 
+    const addAndDeleteToursInFavorite = (tour) => {
+        let favorite = JSON.parse(localStorage.getItem('favorite'))
+        if (!favorite) {
+            favorite = {
+                tours: [],
+            }
+        }
+        let newTour = {
+            tour: tour,
+            count: 1
+        }
+        let newFavorite = favorite.tours.filter(item => item.tour.id === tour.id)
+        if (newFavorite.length) {
+            favorite.tours = favorite.tours.filter(item => item.tour.id !== tour.id)
+        } else {
+            favorite.tours.push(newTour)
+        }
+        localStorage.setItem('favorite', JSON.stringify(favorite))
+        dispatch({
+            type: 'ADD_AND_DELETE_TOUR_FAVORITE',
+            payload: favorite.tours.length
+        })
+        console.log(favorite);
+    }
     const checkTourInCart = (id) => {
         let cart = JSON.parse(localStorage.getItem('cart'))
         if (!cart) {
@@ -72,6 +102,14 @@ const ClientContextProvider = ({ children }) => {
         }
         let newCart = cart.tours.filter(item => item.tour.id === id)
         return newCart.length ? true : false
+    }
+    const checkTourInFavorite = (id) => {
+        let favorite = JSON.parse(localStorage.getItem('favorite'))
+        if (!favorite) {
+            return false
+        }
+        let newFavorite = favorite.tours.filter(item => item.tour.id === id)
+        return newFavorite.length ? true : false
     }
     const getCart = () => {
         let cart = JSON.parse(localStorage.getItem('cart'))
@@ -98,7 +136,28 @@ const ClientContextProvider = ({ children }) => {
         getCart()
     }
 
+    // pagination start 
+    const [posts, setPosts] = useState([])
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postPerPage] = useState(6)
 
+    useEffect(() => {
+        const fetchTours = () => {
+            const data = state.tours || []
+            setPosts(data)
+        }
+        fetchTours()
+    }, [state.tours])
+
+    const indexOfLastPost = currentPage * postPerPage
+    const indexOfFirst = indexOfLastPost - postPerPage
+    const currentPosts = posts.slice(indexOfFirst, indexOfLastPost)
+    const totalPosts = posts.length
+
+    const changePage = (newPage) => {
+        setCurrentPage(newPage)
+    }
+    // pagination end
 
     return (
         <clientContext.Provider value={{
@@ -107,9 +166,16 @@ const ClientContextProvider = ({ children }) => {
             checkTourInCart,
             getCart,
             changeCountTours,
+            addAndDeleteToursInFavorite,
+            checkTourInFavorite,
+            changePage,
 
+            currentPosts,
+            postPerPage,
+            totalPosts,
             tours: state.tours,
             toursCountInCart: state.toursCountInCart,
+            toursCountInFavorite: state.toursCountInFavorite
 
         }}>
             {children}
