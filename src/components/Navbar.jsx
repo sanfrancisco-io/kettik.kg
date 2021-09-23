@@ -8,14 +8,14 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { clientContext } from '../contexts/ClientContext';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { ReactComponent as Logo } from '../images/Logo.svg';
 const useStyles = makeStyles((theme) => ({
     grow: {
         flexGrow: 1,
@@ -89,10 +89,17 @@ const useStyles = makeStyles((theme) => ({
             borderBottom: '2px solid #CCCCFF'
         }
     },
+    logoStyles: {
+        height: '50px',
+        width: '50px',
+    },
+    iconColorStyles: {
+        color: 'white'
+    }
 }));
 
 export default function Navbar() {
-    const { toursCountInCart, toursCountInFavorite } = useContext(clientContext)
+    const { toursCountInCart, toursCountInFavorite, getTours } = useContext(clientContext)
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -152,7 +159,7 @@ export default function Navbar() {
                 <IconButton aria-label="show 4 new mails" color="inherit">
                     <Badge badgeContent={toursCountInCart} color="secondary">
                         <Link to="/cart">
-                            <ShoppingCartIcon />
+                            <ShoppingCartIcon className={classes.iconColorStyles} />
                         </Link>
                     </Badge>
                 </IconButton>
@@ -162,7 +169,7 @@ export default function Navbar() {
                 <IconButton aria-label="show 11 new notifications" color="inherit">
                     <Badge badgeContent={11} color="secondary">
                         <Link to="/favorite">
-                            <FavoriteIcon />
+                            <FavoriteIcon className={classes.iconColorStyles} />
                         </Link>
 
                     </Badge>
@@ -183,13 +190,36 @@ export default function Navbar() {
         </Menu>
     );
 
+
+    // search start
+
+    const history = useHistory('')
+    const [searchValue, setSearchValue] = useState('')
+
+    const filterProducts = (key, value) => {
+        let search = new URLSearchParams(history.location.search)
+        search.set(key, value)
+        let url = `${history.location.pathname}?${search.toString()}`
+        history.push(url)
+        setSearchValue(search.get('q') || '')
+        getTours()
+    }
+    let search = new URLSearchParams(history.location.search)
+
+    useEffect(() => {
+        setSearchValue(search.get('q'))
+    }, [history.location])
+
+    // search end
     return (
         <div className={classes.grow}>
             <AppBar position="fixed" className={classes.root}>
                 <Toolbar>
                     <IconButton aria-label="show 4 new mails" color="inherit">
                         <Badge color="secondary">
-                            <img src='./images/Logo.svg' alt="kettik-logo" />
+                            <Link to='/'>
+                                <Logo viewBox="1 1 80 80" className={classes.logoStyles} />
+                            </Link>
                         </Badge>
                     </IconButton>
                     <Typography className={classes.navbarTypographyContent} >
@@ -201,11 +231,20 @@ export default function Navbar() {
                     <Typography className={classes.navbarTypographyContent} >
                         Контакты
                     </Typography>
+                    <Typography className={classes.navbarTypographyContent} >
+                        Лайфчат
+                    </Typography>
+                    <Typography className={classes.navbarTypographyContent} >
+                        <Link to="/admin">
+                            Админ
+                        </Link>
+                    </Typography>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />
                         </div>
                         <InputBase
+                            onChange={(e) => { filterProducts('q', e.target.value) }}
                             placeholder="Search…"
                             classes={{
                                 root: classes.inputRoot,
@@ -219,14 +258,14 @@ export default function Navbar() {
                         <IconButton aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={toursCountInCart} color="secondary">
                                 <Link to="/cart">
-                                    <ShoppingCartIcon />
+                                    <ShoppingCartIcon className={classes.iconColorStyles} />
                                 </Link>
                             </Badge>
                         </IconButton>
                         <IconButton aria-label="show 17 new notifications" color="inherit">
                             <Badge badgeContent={toursCountInFavorite} color="secondary">
                                 <Link to="/favorite">
-                                    <FavoriteIcon />
+                                    <FavoriteIcon className={classes.iconColorStyles} />
                                 </Link>
                             </Badge>
                         </IconButton>

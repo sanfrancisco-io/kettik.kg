@@ -9,6 +9,7 @@ const AddTours = () => {
         route: '',
         description: '',
         accessibility: '',
+        type: '',
         complexity: '',
         photo: ''
     })
@@ -62,6 +63,13 @@ const AddTours = () => {
                         name='accessibility'
                     />
                     <TextField
+                        value={tours.type}
+                        id="standard-basic"
+                        label="Тип тура"
+                        onChange={handleInputs}
+                        name='type'
+                    />
+                    <TextField
                         value={tours.complexity}
                         id="standard-basic"
                         label="сложность тура"
@@ -85,6 +93,7 @@ const AddTours = () => {
                                 || !tours.route.trim()
                                 || !tours.description.trim()
                                 || !tours.accessibility.trim()
+                                || !tours.type.trim()
                                 || !tours.complexity.trim()
                                 || !tours.photo.trim()) {
                                 alert('Заполните все поля!')
@@ -96,6 +105,7 @@ const AddTours = () => {
                                 route: tours.route.trim(),
                                 description: tours.description.trim(),
                                 accessibility: tours.accessibility.trim(),
+                                type: tours.type.trim(),
                                 complexity: tours.complexity.trim(),
                                 photo: tours.photo.trim(),
                             })

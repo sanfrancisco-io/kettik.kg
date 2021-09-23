@@ -19,7 +19,7 @@ const useStyles = makeStyles({
         margin: '0 10px 10px 10px',
         width: 280,
         minWidth: 240,
-        height: 450,
+        height: 480,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -66,6 +66,9 @@ export default function MediaCard({ item }) {
                     </Typography>
                     <Typography style={{ fontWeight: 'bold' }} className={classes.priceContent}>
                         <h3>Цена :{item.price}</h3>
+                    </Typography>
+                    <Typography style={{ fontWeight: 'bold' }} className={classes.priceContent}>
+                        Тип:{item.type}
                     </Typography>
                 </CardContent>
             </CardActionArea>

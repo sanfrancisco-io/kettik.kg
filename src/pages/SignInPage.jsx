@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,8 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { clientContext } from '../contexts/ClientContext';
+import { useHistory } from 'react-router';
 
 function Copyright() {
     return (
@@ -59,7 +61,23 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInPage() {
     const classes = useStyles();
-
+    const { login } = useContext(clientContext)
+    const [user, setUser] = useState({
+        email: '',
+        password: ''
+    })
+    function handleChange(e) {
+        let obj = {
+            ...user,
+            [e.target.name]: e.target.value
+        }
+        setUser(obj)
+    }
+    const history = useHistory()
+    function handleClick(e) {
+        e.preventDefault()
+        login(user, history)
+    }
     return (
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
@@ -72,8 +90,9 @@ export default function SignInPage() {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <form className={classes.form} noValidate>
+                    <form onSubmit={handleClick} className={classes.form} noValidate>
                         <TextField
+                            onChange={handleChange}
                             variant="outlined"
                             margin="normal"
                             required
@@ -85,6 +104,7 @@ export default function SignInPage() {
                             autoFocus
                         />
                         <TextField
+                            onChange={handleChange}
                             variant="outlined"
                             margin="normal"
                             required

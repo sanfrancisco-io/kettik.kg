@@ -173,6 +173,28 @@ const ClientContextProvider = ({ children }) => {
     }
     // pagination end
 
+
+    // auth and login start
+    const createNewUser = async (newUser, history) => {
+        try {
+            const data = await axios.post('https://intense-retreat-64750.herokuapp.com/auth/registration', newUser)
+            history.push('/')
+        } catch (e) {
+            alert(e.response.data.message)
+        }
+    }
+    const login = async (user, history) => {
+        try {
+            const { data } = await axios.post('https://intense-retreat-64750.herokuapp.com/auth/login', user)
+        } catch (e) {
+            alert(e.response.data.message)
+        }
+    }
+
+
+
+    // auth and login end
+
     return (
         <clientContext.Provider value={{
             getTours,
@@ -184,6 +206,9 @@ const ClientContextProvider = ({ children }) => {
             checkTourInFavorite,
             changePage,
             getFavorites,
+            createNewUser,
+            login,
+
 
             currentPosts,
             postPerPage,

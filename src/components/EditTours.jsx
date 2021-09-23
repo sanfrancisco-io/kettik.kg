@@ -74,6 +74,13 @@ const EditTours = () => {
                                     name='price'
                                 />
                                 <TextField
+                                    value={editTours.type}
+                                    id="standard-basic"
+                                    label="Тип тура"
+                                    onChange={handleInputs}
+                                    name='type'
+                                />
+                                <TextField
                                     value={editTours.route}
                                     id="standard-basic"
                                     label="Маршрут тура"
@@ -95,6 +102,7 @@ const EditTours = () => {
                                     onClick={(e) => {
                                         e.preventDefault()
                                         if (!editTours.accessibility.trim()
+                                            || !editTours.type.trim()
                                             || !editTours.complexity.trim()
                                             || !editTours.description.trim()
                                             || !editTours.photo.trim()

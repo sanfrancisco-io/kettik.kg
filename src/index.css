@@ -25,9 +25,12 @@ code {
 
 
 /* main page start */
+.main-pagetwo{
+  background-color: #fcf8ec;
+}
 .main-content{
   width: 100%;
-  height: 100vh;
+  height: 100%;
   margin-top: 30px;
   display: flex;
   justify-content: space-between;
@@ -53,3 +56,6 @@ code {
   flex-wrap: wrap;
 }
 /* main page end */
+/* .footer{
+  background-image: url('https://cdn.shopify.com/s/files/1/0279/9277/files/do-good-relax_2000x.jpg?v=1588078246');
+} */

@@ -12,7 +12,7 @@ const LeftSideBar = () => {
 
     const { getTours } = React.useContext(clientContext)
     const [price, setPraice] = React.useState('');
-    const [brand, setBrand] = useState('')
+    const [typeTours, setTypeTours] = useState('')
     const history = useHistory()
     const filterProducts = (key, value) => {
         let search = new URLSearchParams(history.location.search)
@@ -20,18 +20,17 @@ const LeftSideBar = () => {
         let url = `${history.location.pathname}?${search.toString()}`
         history.push(url)
         setPraice(search.get('price_lte'))
-        setBrand(search.get('brand'))
+        setTypeTours(search.get('type'))
         getTours()
     }
     let search = new URLSearchParams(history.location.search)
-    // useEffect(() => {
-    //     setPraice(search.get('price_lte'))
-    //     setBrand(search.get('brand'))
-    //     // getBrands()
-    // }, [])
+    useEffect(() => {
+        setPraice(search.get('price_lte'))
+        setTypeTours(search.get('type'))
+    }, [])
     const resetFilter = () => {
         setPraice('')
-        setBrand('')
+        setTypeTours('')
         history.push('/')
         getTours()
     }
@@ -46,20 +45,18 @@ const LeftSideBar = () => {
                     <FormControlLabel value="20000" control={<Radio />} label="20000" />
                     <FormControlLabel value="25000" control={<Radio />} label="25000" />
                 </RadioGroup>
-                <Button onClick={resetFilter}>Reset</Button>
             </FormControl>
-            {/* <div>
+            <div>
                 <FormControl component="fieldset">
-                    <FormLabel component="legend">Бренд</FormLabel>
-                    <RadioGroup aria-label="gender" name="gender1" value={brand} onChange={(e) => filterProducts('brand', e.target.value)}>
-                        {
-                            brands.map(item => (
-                                <FormControlLabel key={item} value={item} control={<Radio />} label={item} />
-                            ))
-                        }
+                    <FormLabel component="legend">Виды туров</FormLabel>
+                    <RadioGroup aria-label="gender" name="gender1" value={typeTours} onChange={(e) => filterProducts('type', e.target.value)}>
+                        <FormControlLabel value="экскурсионный" control={<Radio />} label="Экскурсионные туры" />
+                        <FormControlLabel value="спортивный" control={<Radio />} label="Спортивные туры" />
+                        <FormControlLabel value="горный" control={<Radio />} label="Горные туры" />
                     </RadioGroup>
                 </FormControl>
-            </div> */}
+                <Button onClick={resetFilter}>Reset</Button>
+            </div>
         </div >
     );
 };

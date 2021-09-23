@@ -3,6 +3,8 @@ import React from 'react';
 import LeftSideBar from '../components/LeftSideBar';
 import Navbar from '../components/Navbar';
 import Content from '../components/ToursContent';
+import AboutUs from './AboutUs';
+import Footer from './Footer';
 
 
 const MainPage = () => {
@@ -22,6 +24,7 @@ const MainPage = () => {
                     <LeftSideBar />
                     <Content />
                 </div>
+                <AboutUs />
             </Container>
         </div>
     );

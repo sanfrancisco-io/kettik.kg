@@ -39,6 +39,14 @@ const useStyles = makeStyles({
     cardDisplay: {
         display: 'flex',
         justifyContent: 'space-between'
+    },
+    display: {
+        display: 'flex',
+        paddingTop: '80px'
+    }
+    ,
+    textPriceStyles: {
+        fontSize: '16px'
     }
 });
 
@@ -52,31 +60,32 @@ export default function FavoiteTable({ item }) {
     console.log(favorites);
 
     return (
-        <>
+        <div className={classes.display}>
             {favorites ? (
                 <Card className={classes.root}>
                     {favorites.tours.map((row, index) => (
-                        <><CardActionArea>
-                            <CardMedia
-                                className={classes.media}
-                                image={row.tour.photo}
-                                title="Contemplative Reptile" />
-                            <CardContent>
-                                <Typography className={classes.textContent} gutterBottom variant="h6" component="h2">
-                                    <Truncate lines={2} ellipsis={<span>... <a href='/link/to/article'>далее</a></span>}>
-                                        {row.tour.title}
-                                    </Truncate>
-                                </Typography>
-                                <Typography variant="body2" color="textSecondary" component="p">
-                                    <Truncate lines={3} ellipsis={<span>... <a href='/link/to/article'>далее</a></span>}>
-                                        {row.tour.description}
-                                    </Truncate>
-                                </Typography>
-                                <Typography style={{ fontWeight: 'bold' }} className={classes.priceContent}>
-                                    <h3>Цена :{row.tour.price}</h3>
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea><CardActions className={classes.cardDisplay}>
+                        <div key={row.tour.id}>
+                            <CardActionArea>
+                                <CardMedia
+                                    className={classes.media}
+                                    image={row.tour.photo}
+                                    title="Contemplative Reptile" />
+                                <CardContent>
+                                    <Typography className={classes.textContent} gutterBottom variant="h6" component="h2">
+                                        <Truncate lines={2} ellipsis={<span>... <a href='/link/to/article'>далее</a></span>}>
+                                            {row.tour.title}
+                                        </Truncate>
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">
+                                        <Truncate lines={3} ellipsis={<span>... <a href='/link/to/article'>далее</a></span>}>
+                                            {row.tour.description}
+                                        </Truncate>
+                                    </Typography>
+                                    <Typography variant='h6' style={{ fontWeight: 'bold' }} className={classes.priceContent, classes.textPriceStyles}>
+                                        Цена :{row.tour.price}
+                                    </Typography>
+                                </CardContent>
+                            </CardActionArea><CardActions className={classes.cardDisplay}>
                                 <Button
                                     onClick={() => addAndDeleteToursInCart(item)}
                                     size="small"
@@ -85,17 +94,16 @@ export default function FavoiteTable({ item }) {
                                 </Button>
                                 <Button
                                     onClick={() => addAndDeleteToursInFavorite(item)}
-                                    size="small"
-                                    color="gray">
+                                    size="small">
                                     <FavoriteIcon color={checkTourInFavorite(row.tour.id) ? 'secondary' : 'primary'} />
                                 </Button>
                                 <Button
                                     onClick={() => addAndDeleteToursInFavorite(item)}
-                                    size="small"
-                                    color="gray">
+                                    size="small">
                                     <ChatIcon color={checkTourInFavorite(row.tour.id) ? 'secondary' : 'primary'} />
                                 </Button>
-                            </CardActions></>
+                            </CardActions>
+                        </div>
                     ))}
                 </Card>
 
@@ -104,6 +112,6 @@ export default function FavoiteTable({ item }) {
                 <h2>Loading</h2>
             )
             }
-        </>
+        </div>
     );
 }

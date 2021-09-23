@@ -15,6 +15,7 @@ import { clientContext } from '../contexts/ClientContext';
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
+        marginTop: '20px'
     },
     totalPriceStyles: {
         color: "black !important",
@@ -32,7 +33,7 @@ export default function CartTable() {
     }, [])
 
     function handleChange(id, count) {
-        if (count < 0) {
+        if (count < 1) {
             return
         }
         changeCountTours(count, id)
@@ -53,6 +54,7 @@ export default function CartTable() {
                                     <TableCell align="left">Цена тура</TableCell>
                                     <TableCell align="left">Маршрут тура</TableCell>
                                     <TableCell align="left">Доступность тура по временам года</TableCell>
+                                    <TableCell align="left">Тип тура</TableCell>
                                     <TableCell align="left">Сложность тура</TableCell>
                                     <TableCell align="left">Количество</TableCell>
                                     <TableCell align="left">Общая сумма</TableCell>
@@ -70,6 +72,7 @@ export default function CartTable() {
                                         <TableCell align="left">{row.tour.route}
                                         </TableCell>
                                         <TableCell align="left">{row.tour.Accessibility}</TableCell>
+                                        <TableCell align="left">{row.tour.type}</TableCell>
                                         <TableCell align="left">{row.tour.complexity}</TableCell>
                                         <input type="number"
                                             value={row.count}
