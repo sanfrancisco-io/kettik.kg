@@ -8,6 +8,8 @@ import FavoriteTours from './pages/FavoriteTours';
 import EditPage from './pages/EditPage';
 import MainPage from './pages/MainPage';
 import SignInPage from './pages/SignInPage';
+import SignUpPage from './pages/SignUpPage';
+import Chat from './pages/Chat';
 
 const Routes = () => {
     return (
@@ -18,9 +20,11 @@ const Routes = () => {
                         <Route exact path='/' component={MainPage} />
                         <Route exact path='/admin' component={AdminPage} />
                         <Route exact path='/sign-in' component={SignInPage} />
+                        <Route exact path='/sign-up' component={SignUpPage} />
                         <Route exact path="/edit/:id" component={EditPage} />
                         <Route exact path="/cart" component={CartPage} />
                         <Route exact path="/favorite" component={FavoriteTours} />
+                        <Route exact path="/chat" component={Chat} />
                     </Switch>
                 </BrowserRouter>
             </AdminContextProvider>

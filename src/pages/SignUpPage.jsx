@@ -12,8 +12,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useHistory } from 'react-router';
 import { clientContext } from '../contexts/ClientContext';
-import { useHistory } from "react-router-dom";
+
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -48,21 +49,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUpPage() {
+    const { createNewUser } = useContext(clientContext)
     const classes = useStyles();
-
-    const [newUser, SetNewUser] = useState({
-        email: '',
-        password: ''
+    const [newUser, setNewUser] = useState({
+        email: "",
+        password: "",
     })
-    const history = useHistory()
     function handleChange(e) {
         let obj = {
             ...newUser,
             [e.target.name]: e.target.value
         }
-        SetNewUser(obj)
+        setNewUser(obj)
     }
-    const { createNewUser } = useContext(clientContext)
+    const history = useHistory()
     function handleClick(e) {
         e.preventDefault()
         createNewUser(newUser, history)
@@ -82,7 +82,6 @@ export default function SignUpPage() {
                         <Grid item xs={12}>
                             <TextField
                                 onChange={handleChange}
-
                                 variant="outlined"
                                 required
                                 fullWidth
