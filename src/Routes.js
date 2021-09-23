@@ -10,6 +10,7 @@ import MainPage from './pages/MainPage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import Chat from './pages/Chat';
+import OrderForm from './components/OrderForm';
 
 const Routes = () => {
     return (
@@ -24,7 +25,11 @@ const Routes = () => {
                         <Route exact path="/edit/:id" component={EditPage} />
                         <Route exact path="/cart" component={CartPage} />
                         <Route exact path="/favorite" component={FavoriteTours} />
+
                         <Route exact path="/chat" component={Chat} />
+
+                        <Route exact path="/orderform" component={OrderForm} />
+
                     </Switch>
                 </BrowserRouter>
             </AdminContextProvider>

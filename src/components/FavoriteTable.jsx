@@ -30,6 +30,7 @@ const useStyles = makeStyles({
     },
     display: {
         display: 'flex',
+        paddingTop: '40px'
     },
     textContent: {
         textAlign: 'center'
