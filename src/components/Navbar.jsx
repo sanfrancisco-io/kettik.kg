@@ -95,6 +95,12 @@ const useStyles = makeStyles((theme) => ({
     },
     iconColorStyles: {
         color: 'white'
+    },
+    link: {
+        textDecoration: "none"
+    },
+    color: {
+        color: 'white'
     }
 }));
 
@@ -124,24 +130,39 @@ export default function Navbar() {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
+    let user = JSON.parse(localStorage.getItem('token'))
+    console.log(user);
+    const cleanLocalStorage = (user) => {
+        localStorage.removeItem('token');
+    }
+
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
-        <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            id={menuId}
-            keepMounted
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-        >
-            <Link to='/sign-in'>
-                <MenuItem >Войти</MenuItem>
-            </Link>
-            <Link to='/sign-up'>
-                <MenuItem >Регистрация</MenuItem>
-            </Link>
-        </Menu>
+        <>
+            <Menu
+                anchorEl={anchorEl}
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                id={menuId}
+                keepMounted
+                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                open={isMenuOpen}
+                onClose={handleMenuClose}
+            >
+                {user ? <Link to='/'>
+                    <MenuItem onClick={cleanLocalStorage} >Выйти</MenuItem>
+                </Link> :
+                    <><Link to='/sign-up'>
+                        <MenuItem>Регистрация</MenuItem>
+                    </Link><Link to='/sign-in'>
+                            <MenuItem>Войти</MenuItem>
+                        </Link></>
+
+
+                }
+            </Menu>
+
+
+        </>
     );
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -158,7 +179,7 @@ export default function Navbar() {
             <MenuItem>
                 <IconButton aria-label="show 4 new mails" color="inherit">
                     <Badge badgeContent={toursCountInCart} color="secondary">
-                        <Link to="/cart">
+                        <Link to="/cart" className={classes.link}>
                             <ShoppingCartIcon className={classes.iconColorStyles} />
                         </Link>
                     </Badge>
@@ -168,7 +189,7 @@ export default function Navbar() {
             <MenuItem>
                 <IconButton aria-label="show 11 new notifications" color="inherit">
                     <Badge badgeContent={11} color="secondary">
-                        <Link to="/favorite">
+                        <Link to="/favorite" className={classes.link}>
                             <FavoriteIcon className={classes.iconColorStyles} />
                         </Link>
 
@@ -217,7 +238,7 @@ export default function Navbar() {
                 <Toolbar>
                     <IconButton aria-label="show 4 new mails" color="inherit">
                         <Badge color="secondary">
-                            <Link to='/'>
+                            <Link to='/' className={classes.link}>
                                 <Logo viewBox="1 1 80 80" className={classes.logoStyles} />
                             </Link>
                         </Badge>
@@ -231,13 +252,20 @@ export default function Navbar() {
                     <Typography className={classes.navbarTypographyContent} >
                         Контакты
                     </Typography>
+                    <Link to="/chat" className={classes.link}>
+                        <Typography className={classes.navbarTypographyContent} >
+                            Лайфчат
+                        </Typography>
+                    </Link>
                     <Typography className={classes.navbarTypographyContent} >
-                        Лайфчат
-                    </Typography>
-                    <Typography className={classes.navbarTypographyContent} >
-                        <Link to="/admin">
-                            Админ
-                        </Link>
+                        {user ?
+                            <Link to="/admin" className={classes.link}>
+                                Админ
+                            </Link> : ''
+
+
+
+                        }
                     </Typography>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
@@ -257,14 +285,14 @@ export default function Navbar() {
                     <div className={classes.sectionDesktop}>
                         <IconButton aria-label="show 4 new mails" color="inherit">
                             <Badge badgeContent={toursCountInCart} color="secondary">
-                                <Link to="/cart">
+                                <Link to="/cart" className={classes.link}>
                                     <ShoppingCartIcon className={classes.iconColorStyles} />
                                 </Link>
                             </Badge>
                         </IconButton>
                         <IconButton aria-label="show 17 new notifications" color="inherit">
                             <Badge badgeContent={toursCountInFavorite} color="secondary">
-                                <Link to="/favorite">
+                                <Link to="/favorite" className={classes.link}>
                                     <FavoriteIcon className={classes.iconColorStyles} />
                                 </Link>
                             </Badge>
@@ -295,6 +323,6 @@ export default function Navbar() {
             </AppBar>
             {renderMobileMenu}
             {renderMenu}
-        </div>
+        </div >
     );
 }

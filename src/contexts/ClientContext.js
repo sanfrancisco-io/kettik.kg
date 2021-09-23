@@ -177,19 +177,26 @@ const ClientContextProvider = ({ children }) => {
     // auth and login start
     const createNewUser = async (newUser, history) => {
         try {
-            const data = await axios.post('https://intense-retreat-64750.herokuapp.com/auth/registration', newUser)
+            const { data } = await axios.post('https://intense-retreat-64750.herokuapp.com/auth/registration', newUser)
             history.push('/')
-        } catch (e) {
+            console.log(data)
+
+        }
+        catch (e) {
             alert(e.response.data.message)
         }
     }
     const login = async (user, history) => {
         try {
             const { data } = await axios.post('https://intense-retreat-64750.herokuapp.com/auth/login', user)
+            history.push("/")
+            console.log(data)
+            localStorage.setItem('token', JSON.stringify(data))
         } catch (e) {
             alert(e.response.data.message)
         }
     }
+
 
 
 

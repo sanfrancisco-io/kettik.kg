@@ -64,8 +64,9 @@ export default function MediaCard({ item }) {
                             {item.description}
                         </Truncate>
                     </Typography>
-                    <Typography style={{ fontWeight: 'bold' }} className={classes.priceContent}>
-                        <h3>Цена :{item.price}</h3>
+
+                    <Typography variant="h6" style={{ fontWeight: 'bold' }} className={classes.priceContent}>
+                        Цена :{item.price}
                     </Typography>
                     <Typography style={{ fontWeight: 'bold' }} className={classes.priceContent}>
                         Тип:{item.type}
