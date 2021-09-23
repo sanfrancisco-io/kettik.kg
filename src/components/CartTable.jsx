@@ -11,6 +11,7 @@ import { adminContext } from '../contexts/AdminContext'
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { clientContext } from '../contexts/ClientContext';
+import OrderForm from './OrderForm';
 
 const useStyles = makeStyles({
     table: {
@@ -21,6 +22,13 @@ const useStyles = makeStyles({
         color: "black !important",
         fontWeight: "bold !important",
         fontSize: "16px !important"
+    },
+    displayStyles: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        position: 'relative',
+        bottom: '20px'
+
     }
 });
 
@@ -28,6 +36,7 @@ const useStyles = makeStyles({
 export default function CartTable() {
     const classes = useStyles();
     const { getCart, cart, getTours, changeCountTours } = useContext(clientContext)
+    console.log(cart);
     useEffect(() => {
         getCart()
     }, [])
@@ -46,7 +55,14 @@ export default function CartTable() {
                 cart ? (
                     <TableContainer component={Paper} >
                         <Table className={classes.table} aria-label="caption table">
-                            <caption className={classes.totalPriceStyles}>Итоговая сумма : {cart.totalPrice}</caption>
+                            <caption className={classes.totalPriceStyles}>Итоговая сумма : {cart.totalPrice}
+                                <div className={classes.displayStyles}>
+                                    <Link to='/orderform'>
+                                        <Button variant="contained" color="primary">Оформить заказ</Button>
+                                    </Link>
+                                </div>
+                            </caption>
+
                             <TableHead>
                                 <TableRow>
                                     <TableCell>№</TableCell>
@@ -63,7 +79,7 @@ export default function CartTable() {
                             </TableHead>
                             <TableBody>
                                 {cart.tours.map((row, index) => (
-                                    <TableRow key={row.name}>
+                                    <TableRow key={row.tour.id}>
                                         <TableCell component="th" scope="row">
                                             {index + 1}
                                         </TableCell>

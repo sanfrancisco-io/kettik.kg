@@ -28,6 +28,7 @@ const AdminContextProvider = ({ children }) => {
         getTours()
     }
 
+
     const getTours = async () => {
         const { data } = await axios(TOURS_API)
         dispatch({
