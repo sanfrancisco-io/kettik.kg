@@ -15,6 +15,9 @@ const INIT_STATE = {
         ?
         JSON.parse(localStorage.getItem('favorite')).tours.length
         : 0,
+    cart: null,
+    favorite: null,
+
 }
 
 const reducer = (state = INIT_STATE, action) => {
@@ -25,6 +28,10 @@ const reducer = (state = INIT_STATE, action) => {
             return { ...state, toursCountInCart: action.payload }
         case 'ADD_AND_DELETE_TOUR_FAVORITE':
             return { ...state, toursCountInFavorite: action.payload }
+        case "GET_CART":
+            return { ...state, cart: action.payload }
+        case "GET_FAVORITES":
+            return { ...state, favorites: action.payload }
         default:
             return { ...state }
     }
@@ -118,6 +125,13 @@ const ClientContextProvider = ({ children }) => {
             payload: cart
         })
     }
+    const getFavorites = () => {
+        let favorites = JSON.parse(localStorage.getItem('favorite'))
+        dispatch({
+            type: 'GET_FAVORITES',
+            payload: favorites
+        })
+    }
 
     const changeCountTours = (count, id) => {
         let cart = JSON.parse(localStorage.getItem('cart'))
@@ -169,12 +183,15 @@ const ClientContextProvider = ({ children }) => {
             addAndDeleteToursInFavorite,
             checkTourInFavorite,
             changePage,
+            getFavorites,
 
             currentPosts,
             postPerPage,
             totalPosts,
             tours: state.tours,
             toursCountInCart: state.toursCountInCart,
+            cart: state.cart,
+            favorites: state.favorites,
             toursCountInFavorite: state.toursCountInFavorite
 
         }}>
