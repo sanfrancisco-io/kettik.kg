@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,10 +7,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { adminContext } from '../contexts/AdminContext'
 import { Button, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { clientContext } from '../contexts/ClientContext';
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
@@ -46,17 +44,31 @@ const OrderForm = () => {
         mail: '',
         phone: ''
     })
-    function handleInputs(e) {
-        let newPeoples = {
+    const handleChange = (e) => {
+        let newInputs = {
             ...checkPeople,
             [e.target.name]: e.target.value
         }
-        seChecktPeople(newPeoples)
+        seChecktPeople(newInputs)
     }
-    let cart = JSON.parse(localStorage.getItem('cart'))
     const buyTours = () => {
         localStorage.removeItem('cart')
     }
+    const handleClick = (e) => {
+        e.preventDefault()
+        if (
+            !checkPeople.name.trim() ||
+            !checkPeople.mail.trim() ||
+            !checkPeople.phone.trim()
+        ) {
+            alert("Заполните все поля")
+            return
+        }
+        buyTours()
+        window.open('/paymentform')
+    }
+
+    let cart = JSON.parse(localStorage.getItem('cart'))
     return (
         <>
             {
@@ -90,18 +102,15 @@ const OrderForm = () => {
             }
             <div className={classes.stylesForm}>
                 <form className={classes.root}>
-                    <TextField value={checkPeople.name} onChange={handleInputs} name='name' type='text' id="standard-basic" label="Имя заказчика" />
-                    <TextField value={checkPeople.mail} onChange={handleInputs} name='mail' type='mail' id="standard-basic" label="Почту заказчика" />
-                    <TextField value={checkPeople.phone} onChange={handleInputs} name='phone' type='tel' id="standard-basic" label="Введите телефон заказчика" />
-                    {
-                        checkPeople.name.trim() || checkPeople.mail.trim() ? (
-                            <Link to='/paymentform'>
-                                <Button style={{ marginTop: '20px' }} variant="contained" color="primary" onClick={(e) => {
-                                    buyTours()
-                                }}
-                                > Купить</Button>
-                            </Link>) : (null)
-                    }
+                    <TextField value={checkPeople.name} onChange={handleChange} name='name' type='text' id="standard-basic" label="Имя заказчика" />
+                    <TextField value={checkPeople.mail} onChange={handleChange} name='mail' type='mail' id="standard-basic" label="Почту заказчика" />
+                    <TextField value={checkPeople.phone} onChange={handleChange} name='phone' type='tel' id="standard-basic" label="Введите телефон заказчика" />
+                    <Button
+                        style={{ marginTop: '20px' }}
+                        variant="contained"
+                        color="primary"
+                        onClick={handleClick}
+                    >Купить</Button>
                 </form>
             </div>
         </>

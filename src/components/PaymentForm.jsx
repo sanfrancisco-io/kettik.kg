@@ -1,78 +1,93 @@
-import { Button, TextField } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
-
-export default class PaymentForm extends React.Component {
-
-
-    state = {
-        cvc: '',
-        expiry: '',
-        focus: '',
-        name: '',
+import { Container } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Cards from 'react-credit-cards';
+import { Button } from '@material-ui/core';
+const OnlinePaymentPage = () => {
+    const [inputs, setInputs] = useState({
         number: '',
-    };
+        name: '',
+        expiry: '',
+        cvc: ''
 
-    handleInputFocus = (e) => {
-        this.setState({ focus: e.target.name });
+    })
+    const handleChange = (e) => {
+        let newInputs = {
+            ...inputs,
+            [e.target.name]: e.target.value
+        }
+        setInputs(newInputs)
     }
+    const [focus, setFocus] = useState('')
+    const handleClick = (e) => {
+        e.preventDefault()
+        if (
+            !inputs.number.trim() ||
+            !inputs.name.trim() ||
+            !inputs.expiry.trim() ||
+            !inputs.cvc.trim()
 
-    handleInputChange = (e) => {
-        const { name, value } = e.target;
-
-        this.setState({ [name]: value });
+        ) {
+            alert("Заполните все поля")
+            return
+        }
+        alert("ваш заказ оформлен и оплачен")
+        setTimeout(() => {
+            window.close('/')
+        }, 2000);
     }
-    render() {
-        return (
-            <div className='paymentCardForm' id="PaymentForm">
-                <Cards
-                    cvc={this.state.cvc}
-                    expiry={this.state.expiry}
-                    focused={this.state.focus}
-                    name={this.state.name}
-                    number={this.state.number}
-                />
-                <form>
-                    <TextField
-                        id="standard-basic"
-                        type="tel"
-                        name="number"
-                        placeholder="Card Number"
-                        onChange={this.handleInputChange}
-                        onFocus={this.handleInputFocus}
-                    />
-                    <TextField
-                        id="standard-basic"
-                        type="text"
-                        name="name"
-                        placeholder="Name"
-                        onChange={this.handleInputChange}
-                        onFocus={this.handleInputFocus}
-                    />
-                    <TextField
-                        id="standard-basic"
-                        type="tel"
-                        name="expire"
-                        placeholder="MM/YY"
-                        onChange={this.handleInputChange}
-                        onFocus={this.handleInputFocus}
-                    />
-                    <TextField
-                        id="standard-basic"
-                        type="tel"
-                        name="cvc"
-                        placeholder="CVC"
-                        onChange={this.handleInputChange}
-                        onFocus={this.handleInputFocus}
-                    />
+    return (
+        <div className='cardPage'>
+            <Container>
+                <div className='card'>
                     <Link to='/'>
-                        <Button style={{ marginTop: '20px' }} variant="contained" color="primary">Купить</Button>
+                        <Button style={{ marginTop: '20px' }} variant="contained" color="primary">Вернуться назад</Button>
                     </Link>
-                </form>
-            </div>
-        );
-    }
-}
+                    <Cards
+                        number={inputs.number}
+                        name={inputs.name}
+                        expiry={inputs.expiry}
+                        cvc={inputs.cvc}
+                        focused={focus}
+                    />
+                    <form className='card-inputs'>
+                        <input
+
+                            type="tel"
+                            name='number'
+                            placeholder='Card Number'
+                            value={inputs.number}
+                            onChange={handleChange}
+                            onFocus={e => setFocus(e.target.name)} />
+                        <input
+                            type="text"
+                            name='name'
+                            placeholder='Name'
+                            value={inputs.name}
+                            onChange={handleChange}
+                            onFocus={e => setFocus(e.target.name)} />
+                        <input
+                            type="text"
+                            name='expiry'
+                            placeholder='MM/YY Expiry'
+                            value={inputs.expiry}
+                            onChange={handleChange}
+                            onFocus={e => setFocus(e.target.name)} />
+                        <input
+                            type="tel"
+                            name='cvc'
+                            placeholder='CVC'
+                            value={inputs.cvc}
+                            onChange={handleChange}
+                            onFocus={e => setFocus(e.target.name)} />
+
+                        <button onClick={handleClick}>Оплатить</button>
+                    </form>
+                </div>
+            </Container>
+        </div>
+    );
+};
+
+export default OnlinePaymentPage;

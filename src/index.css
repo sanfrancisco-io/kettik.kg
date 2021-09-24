@@ -56,11 +56,34 @@ code {
   flex-wrap: wrap;
 }
 /* main page end */
-.paymentCardForm{
+.cardPage{
   background: linear-gradient(pink,rgb(12, 255, 255));
   height: 100vh;
   margin:0 auto;
 }
-.paymentCardForm form #standard-basic{
-
+.card-inputs{
+  margin-top: 10px;
+  width: 20%;
+  margin: 0 auto;
+  background-color: rgb(125, 177, 226);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.card-inputs input{
+  margin: 10px auto;
+  text-align: center;
+  border-radius: 5px;
+  outline: none;
+  border:none;
+  padding: 5px;
+}
+.card-inputs button{
+  background-color: rgb(65, 161, 77);
+  outline: none;
+  border: none;
+  padding: 10px;
+  margin: 0 auto;
+  border-radius: 5px;
 }

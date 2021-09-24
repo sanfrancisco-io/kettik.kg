@@ -252,9 +252,6 @@ export default function Navbar() {
                         Контакты
                     </Typography>
                     <Link to="/chat" className={classes.link}>
-                        <Typography className={classes.navbarTypographyContent} >
-                            Лайфчат
-                        </Typography>
                     </Link>
                     <Typography className={classes.navbarTypographyContent} >
                         {user ?
