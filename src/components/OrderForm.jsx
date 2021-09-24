@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -18,11 +18,6 @@ const useStyles = makeStyles((theme) => ({
             width: '25ch',
         },
     },
-    stylesForm: {
-        width: '100%',
-        margin: '0 auto',
-        paddingLeft: '150px',
-    },
     table: {
         minWidth: 650,
         marginTop: '20px'
@@ -41,16 +36,27 @@ const useStyles = makeStyles((theme) => ({
     },
     mainContentStyles: {
         width: '50%',
-        margin: '0 auto'
     }
 }));
 
 const OrderForm = () => {
+    const classes = useStyles();
+    const [checkPeople, seChecktPeople] = useState({
+        name: '',
+        mail: '',
+        phone: ''
+    })
+    function handleInputs(e) {
+        let newPeoples = {
+            ...checkPeople,
+            [e.target.name]: e.target.value
+        }
+        seChecktPeople(newPeoples)
+    }
+    let cart = JSON.parse(localStorage.getItem('cart'))
     const buyTours = () => {
         localStorage.removeItem('cart')
     }
-    const classes = useStyles();
-    let cart = JSON.parse(localStorage.getItem('cart'))
     return (
         <>
             {
@@ -58,7 +64,7 @@ const OrderForm = () => {
                     <div className={classes.mainContentStyles}>
                         <TableContainer component={Paper} >
                             <Table className={classes.table} aria-label="caption table">
-                                <caption className={classes.totalPriceStyles}>Итоговая сумма : {cart.totalPrice}
+                                <caption className={classes.totalPriceStyles}>Итоговая сумма : {cart.totalPrice} Сом
                                 </caption>
                                 <TableHead>
                                     <TableRow>
@@ -71,7 +77,7 @@ const OrderForm = () => {
                                         cart.tours.map((row) => (
                                             <TableRow key={row.tour.id}>
                                                 <TableCell align="left">{row.tour.title}</TableCell>
-                                                <TableCell align="left">{row.tour.price}</TableCell>
+                                                <TableCell align="left">{row.tour.price} Сом</TableCell>
                                             </TableRow>
                                         ))}
                                 </TableBody>
@@ -84,12 +90,18 @@ const OrderForm = () => {
             }
             <div className={classes.stylesForm}>
                 <form className={classes.root}>
-                    <TextField id="standard-basic" label="Имя заказчика" />
-                    <TextField id="standard-basic" label="Почту заказчика" />
-                    <TextField id="standard-basic" label="Введите телефон заказчика" />
-                    <Link to='/'>
-                        <Button onClick={buyTours} style={{ marginTop: '20px' }} variant="contained" color="primary">Купить</Button>
-                    </Link>
+                    <TextField value={checkPeople.name} onChange={handleInputs} name='name' type='text' id="standard-basic" label="Имя заказчика" />
+                    <TextField value={checkPeople.mail} onChange={handleInputs} name='mail' type='mail' id="standard-basic" label="Почту заказчика" />
+                    <TextField value={checkPeople.phone} onChange={handleInputs} name='phone' type='tel' id="standard-basic" label="Введите телефон заказчика" />
+                    {
+                        checkPeople.name.trim() || checkPeople.mail.trim() ? (
+                            <Link to='/paymentform'>
+                                <Button style={{ marginTop: '20px' }} variant="contained" color="primary" onClick={(e) => {
+                                    buyTours()
+                                }}
+                                > Купить</Button>
+                            </Link>) : (null)
+                    }
                 </form>
             </div>
         </>

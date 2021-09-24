@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Navbar() {
-    const { toursCountInCart, toursCountInFavorite, getTours } = useContext(clientContext)
+    const { toursCountInCart, toursCountInFavorite, getTours, checkTourInCart } = useContext(clientContext)
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -135,7 +135,6 @@ export default function Navbar() {
     const cleanLocalStorage = (user) => {
         localStorage.removeItem('token');
     }
-
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
         <>
@@ -244,10 +243,10 @@ export default function Navbar() {
                         </Badge>
                     </IconButton>
                     <Typography className={classes.navbarTypographyContent} >
-                        О нас
+                        Туры
                     </Typography>
                     <Typography className={classes.navbarTypographyContent} >
-                        Туры
+                        О нас
                     </Typography>
                     <Typography className={classes.navbarTypographyContent} >
                         Контакты

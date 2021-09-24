@@ -7,11 +7,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { adminContext } from '../contexts/AdminContext'
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { clientContext } from '../contexts/ClientContext';
-import OrderForm from './OrderForm';
 
 const useStyles = makeStyles({
     table: {
@@ -87,7 +85,7 @@ export default function CartTable() {
                                         <TableCell align="left">{row.tour.price}</TableCell>
                                         <TableCell align="left">{row.tour.route}
                                         </TableCell>
-                                        <TableCell align="left">{row.tour.Accessibility}</TableCell>
+                                        <TableCell align="left">{row.tour.accessibility}</TableCell>
                                         <TableCell align="left">{row.tour.type}</TableCell>
                                         <TableCell align="left">{row.tour.complexity}</TableCell>
                                         <input type="number"

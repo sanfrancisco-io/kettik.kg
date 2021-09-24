@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -8,9 +8,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import CloseIcon from '@material-ui/icons/Close';
 import Truncate from 'react-truncate';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ChatIcon from '@material-ui/icons/Chat';
 import { clientContext } from '../contexts/ClientContext';
 
 const useStyles = makeStyles({
@@ -46,15 +45,20 @@ const useStyles = makeStyles({
     }
 });
 
-export default function FavoiteTable({ item }) {
+export default function FavoiteTable() {
     const classes = useStyles();
     const { favorites, getFavorites, addAndDeleteToursInFavorite, checkTourInFavorite, checkTourInCart, addAndDeleteToursInCart } = useContext(clientContext)
+    // let removeItem = JSON.parse(localStorage.getItem('favorite'))
+    // const [item, setItem] = useState(removeItem)
 
+    // const deleteTours = (id) => {
+    //     setItem(item.filter(item => item.id !== id))
+    // }
 
     useEffect(() => {
         getFavorites()
     }, [])
-    console.log(favorites);
+
 
 
 
@@ -62,9 +66,9 @@ export default function FavoiteTable({ item }) {
         <div className={classes.display}>
             {favorites ? (
 
-                favorites.tours.map((row, index) => (
+                favorites.tours.map(row => (
 
-                    <Card className={classes.root}>
+                    <Card key={row.tour.id} className={classes.root}>
                         <CardActionArea>
                             <CardMedia
                                 className={classes.media}
@@ -81,28 +85,22 @@ export default function FavoiteTable({ item }) {
                                         {row.tour.description}
                                     </Truncate>
                                 </Typography>
-                                <Typography style={{ fontWeight: 'bold' }} className={classes.priceContent}>
-                                    <h3>Цена :{row.tour.price}</h3>
+                                <Typography variant='h6' style={{ fontWeight: 'bold' }} className={classes.priceContent}>
+                                    Цена :{row.tour.price}
                                 </Typography>
                             </CardContent>
                         </CardActionArea><CardActions className={classes.cardDisplay}>
                             <Button
-                                onClick={() => addAndDeleteToursInCart(item)}
+                                // onClick={() => deleteTours(row.tour.id)}
                                 size="small"
                                 color="primary">
                                 <ShoppingCartIcon color={checkTourInCart(row.tour.id) ? 'secondary' : 'primary'} />
                             </Button>
                             <Button
-                                onClick={() => addAndDeleteToursInFavorite(item)}
+                                // onClick={() => deleteTours(row.tour.id)}
                                 size="small"
-                                color="gray">
-                                <FavoriteIcon color={checkTourInFavorite(row.tour.id) ? 'secondary' : 'primary'} />
-                            </Button>
-                            <Button
-                                onClick={() => addAndDeleteToursInFavorite(item)}
-                                size="small"
-                                color="gray">
-                                <ChatIcon color={checkTourInFavorite(row.tour.id) ? 'secondary' : 'primary'} />
+                                color="primary">
+                                <CloseIcon color={checkTourInFavorite(row.tour.id) ? 'secondary' : 'primary'} />
                             </Button>
                         </CardActions>
                     </Card>

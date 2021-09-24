@@ -1,8 +1,15 @@
 import { TextField, Button } from '@material-ui/core';
 import React, { useContext, useState } from 'react';
 import { adminContext } from '../contexts/AdminContext';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles({
+    colorText: {
+        color: 'white'
+    }
+})
 const AddTours = () => {
+    const classes = useStyles();
     const [tours, setTours] = useState({
         title: '',
         price: '',

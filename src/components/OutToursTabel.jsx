@@ -37,7 +37,7 @@ export default function ProductTable() {
                                     <TableCell fontWeight={500} align="left">Маршрут</TableCell>
                                     <TableCell align="left">Описание</TableCell>
                                     <TableCell align="left">Фото</TableCell>
-                                    <TableCell align="left">Доступность</TableCell>
+                                    <TableCell align="left">Тип</TableCell>
                                     <TableCell align="left">Сложность</TableCell>
                                     <TableCell align="left">Удаление</TableCell>
                                     <TableCell align="left">Редактироание</TableCell>
@@ -57,7 +57,7 @@ export default function ProductTable() {
                                             <TableCell align="left">
                                                 <img width='100' src={item.photo} alt='toursphoto' />
                                             </TableCell>
-                                            <TableCell align="left">{item.Accessibility}</TableCell>
+                                            <TableCell align="left">{item.type}</TableCell>
                                             <TableCell align="left">{item.complexity}</TableCell>
                                             <TableCell align="left" ><Button align="left" onClick={() => deleteTour(item.id)} variant="contained" color="primary">
                                                 Удалить

@@ -83,14 +83,8 @@ export default function MediaCard({ item }) {
                 <Button
                     onClick={() => addAndDeleteToursInFavorite(item)}
                     size="small"
-                    color="gray">
+                    color="primary">
                     <FavoriteIcon color={checkTourInFavorite(item.id) ? 'secondary' : 'primary'} />
-                </Button>
-                <Button
-                    onClick={() => addAndDeleteToursInFavorite(item)}
-                    size="small"
-                    color="gray">
-                    <ChatIcon color={checkTourInFavorite(item.id) ? 'secondary' : 'primary'} />
                 </Button>
             </CardActions>
         </Card>

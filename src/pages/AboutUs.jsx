@@ -13,7 +13,7 @@ const useStyles = makeStyles({
         fontSize: '20px',
         padding: '15px',
         color: '#0e2d68',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     imagesStyles: {
         width: '50%',
