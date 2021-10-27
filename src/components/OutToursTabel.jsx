@@ -16,15 +16,14 @@ const useStyles = makeStyles({
         minWidth: 650,
     },
 });
-
-export default function ProductTable() {
+const OutToursTabel = () => {
     const classes = useStyles();
     const { tours, getTours, deleteTour } = useContext(adminContext)
     useEffect(() => {
         getTours()
     }, [])
     return (
-        <div className='table_container'>
+        <div>
             {
                 tours ? (
                     <TableContainer className='main-table' component={Paper} >
@@ -84,4 +83,6 @@ export default function ProductTable() {
             }
         </div>
     );
-}
+};
+
+export default OutToursTabel;

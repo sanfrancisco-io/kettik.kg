@@ -1,9 +1,7 @@
 import 'react-credit-cards/es/styles-compiled.css';
 import { Container } from '@material-ui/core';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import Cards from 'react-credit-cards';
-import { Button } from '@material-ui/core';
 const OnlinePaymentPage = () => {
     const [inputs, setInputs] = useState({
         number: '',
@@ -41,9 +39,6 @@ const OnlinePaymentPage = () => {
         <div className='cardPage'>
             <Container>
                 <div className='card'>
-                    <Link to='/'>
-                        <Button style={{ marginTop: '20px' }} variant="contained" color="primary">Вернуться назад</Button>
-                    </Link>
                     <Cards
                         number={inputs.number}
                         name={inputs.name}
@@ -81,7 +76,6 @@ const OnlinePaymentPage = () => {
                             value={inputs.cvc}
                             onChange={handleChange}
                             onFocus={e => setFocus(e.target.name)} />
-
                         <button onClick={handleClick}>Оплатить</button>
                     </form>
                 </div>

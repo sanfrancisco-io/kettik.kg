@@ -48,13 +48,6 @@ const useStyles = makeStyles({
 export default function FavoiteTable() {
     const classes = useStyles();
     const { favorites, getFavorites, addAndDeleteToursInFavorite, checkTourInFavorite, checkTourInCart, addAndDeleteToursInCart } = useContext(clientContext)
-    // let removeItem = JSON.parse(localStorage.getItem('favorite'))
-    // const [item, setItem] = useState(removeItem)
-
-    // const deleteTours = (id) => {
-    //     setItem(item.filter(item => item.id !== id))
-    // }
-
     useEffect(() => {
         getFavorites()
     }, [])

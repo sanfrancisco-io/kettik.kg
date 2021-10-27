@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Navbar() {
-    const { toursCountInCart, toursCountInFavorite, getTours, checkTourInCart } = useContext(clientContext)
+    const { toursCountInCart, toursCountInFavorite, getTours } = useContext(clientContext)
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -150,17 +150,15 @@ export default function Navbar() {
                 {user ? <Link to='/'>
                     <MenuItem onClick={cleanLocalStorage} >Выйти</MenuItem>
                 </Link> :
-                    <><Link to='/sign-up'>
-                        <MenuItem>Регистрация</MenuItem>
-                    </Link><Link to='/sign-in'>
+                    <>
+                        <Link to='/sign-up'>
+                            <MenuItem>Регистрация</MenuItem>
+                        </Link><Link to='/sign-in'>
                             <MenuItem>Войти</MenuItem>
-                        </Link></>
-
-
+                        </Link>
+                    </>
                 }
             </Menu>
-
-
         </>
     );
 
@@ -258,9 +256,6 @@ export default function Navbar() {
                             <Link to="/admin" className={classes.link}>
                                 Админ
                             </Link> : ''
-
-
-
                         }
                     </Typography>
                     <div className={classes.search}>

@@ -11,7 +11,6 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Truncate from 'react-truncate';
 import { clientContext } from '../contexts/ClientContext';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ChatIcon from '@material-ui/icons/Chat';
 
 const useStyles = makeStyles({
     root: {

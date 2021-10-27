@@ -112,6 +112,9 @@ const OrderForm = () => {
                         onClick={handleClick}
                     >Купить</Button>
                 </form>
+                <Link to='/'>
+                    <Button style={{ marginTop: '20px' }} variant="contained" color="primary">Вернуться назад</Button>
+                </Link>
             </div>
         </>
     );

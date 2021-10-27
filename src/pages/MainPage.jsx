@@ -1,9 +1,8 @@
 import { Container } from '@material-ui/core';
-import React, { useContext } from 'react';
+import React from 'react';
 import LeftSideBar from '../components/LeftSideBar';
 import Navbar from '../components/Navbar';
 import Content from '../components/ToursContent';
-import { clientContext } from '../contexts/ClientContext';
 import AboutUs from './AboutUs';
 import Footer from './Footer';
 
